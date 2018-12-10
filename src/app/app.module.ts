@@ -15,13 +15,15 @@ import {
 import { LoginComponent } from './Components/Login/login/login.component';
 import { RegisterComponent } from './Components/Register/register/register.component';
 import {ReactiveFormsModule} from '@angular/forms';
+import { BabyHomeComponent } from './Components/Baby/baby-home/baby-home.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    BabyHomeComponent
   ],
   imports: [
     BrowserModule,
