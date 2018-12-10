@@ -1,3 +1,26 @@
-<p>
-  login works!
-</p>
+<form novalidate [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm)">
+  <div class="container">
+    <div class="row">
+      <div class="example-container">
+        <mat-form-field>
+          <input matInput formControlName="username" placeholder="Username">
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="example-container">
+        <mat-form-field>
+          <input matInput formControlName="password" placeholder="password">
+        </mat-form-field>
+      </div>
+
+      <br />
+      <div class="button-row">
+        <button mat-flat-button>Login</button>
+      </div>
+
+
+      <!-- {{loginForm.status}} -->
+    </div>
+  </div>
+</form>
