@@ -7,7 +7,7 @@ import {Observable, of} from 'rxjs';
 })
 export class AuthService {
 
-  isLoggedIn = false;
+
 
   // store the URL so we can redirect after logging in
   redirectUrl: string;
@@ -16,14 +16,14 @@ export class AuthService {
     // IRL: Call a ws, authenticate user, save user info or token in auth.service.
     return of(true).pipe(
       tap(val => {
-        this.isLoggedIn = true;
-        console.log(this.isLoggedIn);
+        localStorage.setItem('isLoggedIn', 'true');
+        console.log(localStorage.getItem('isLoggedIn'));
       })
     );
   }
 
   logout(): void {
-    this.isLoggedIn = false;
+    localStorage.setItem('isLoggedIn', 'false');
   }
 }
 
