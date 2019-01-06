@@ -42,16 +42,20 @@ export class LoginComponent implements OnInit {
     if (loginForm.valid) {
       for (let key in this.users) {
         if (this.f.username.value === this.users[key]['userName'] && this.f.password.value === this.users[key]['password']) {
+          localStorage.setItem('currentUserType', this.users[key]['type']);
           this.authService.login(this.users[key]['_id']).subscribe(result => {
-            // Navigate based on a certain condition.
-            this.router.navigate(['/home']);
+            if (localStorage.getItem('currentUserType') === 'Sitter') { // If currentUserType is Sitter then user is navigated to /sitter
+              this.router.navigate(['/sitter']);
+            } else if (localStorage.getItem('currentUserType') === 'Baby') { // If currentUserType is Sitter then user is navigated to /sitter
+              this.router.navigate(['/baby']);
+            } else {
+              this.router.navigate(['/login']);
+            }
           });
-        }else {
+        } else {
           console.log('Wrong username or password!');
         }
       }
-    } else {
-      // promt user for not filling out fields.
     }
 
     console.log(loginForm);

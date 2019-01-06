@@ -7,8 +7,6 @@ import {Observable, of} from 'rxjs';
 })
 export class AuthService {
 
-
-
   // store the URL so we can redirect after logging in
   redirectUrl: string;
 
@@ -18,7 +16,6 @@ export class AuthService {
       tap(val => {
         localStorage.setItem('isLoggedIn', 'true');
         localStorage.setItem('currentUserToken', id);
-        console.log(localStorage.getItem('isLoggedIn'));
       })
     );
   }
@@ -27,5 +24,38 @@ export class AuthService {
     localStorage.setItem('isLoggedIn', 'false');
     localStorage.setItem('currentUserToken', null);
   }
+
+  // public isSitter(): boolean {
+  //   let isSitter = false;
+  //   const user = this.getUserToken();
+  //   const allowedGroups = ['Sitter', 'Baby']; // TODO: move to config file.
+  //   if (user !== null && user !== undefined) {
+  //     try {
+  //       const userGroups: any = user.role;
+  //       if (userGroups !== undefined && userGroups !== null && userGroups.length > 0) {
+  //         try {
+  //           userGroups.forEach((e: any) => {
+  //             if (allowedGroups.indexOf(e) > -1) {
+  //               isSitter = true;
+  //             }
+  //           });
+  //         } catch (e) {
+  //           if (allowedGroups.indexOf(userGroups) > -1) {
+  //             isSitter = true;
+  //           }
+  //         }
+  //       }
+  //     } catch (e) {
+  //       isSitter = false;
+  //     }
+  //   }
+  //   return isSitter;
+  // }
+
+  // public getUserToken(): any {
+  //   return localStorage.getItem('currentUserType');
+  // }
 }
+
+
 

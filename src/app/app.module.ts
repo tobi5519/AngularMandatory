@@ -17,6 +17,8 @@ import { RegisterComponent } from './Components/Register/register/register.compo
 import {ReactiveFormsModule} from '@angular/forms';
 import { BabyHomeComponent } from './Components/Baby/baby-home/baby-home.component';
 import { HttpClientModule } from '@angular/common/http';
+import {AuthGuard} from './auth/auth.guard';
+import { SitterHomeComponent } from './Components/Sitter/sitter-home/sitter-home.component';
 
 
 @NgModule({
@@ -24,7 +26,8 @@ import { HttpClientModule } from '@angular/common/http';
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    BabyHomeComponent
+    BabyHomeComponent,
+    SitterHomeComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +45,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatGridListModule,
     MatCheckboxModule
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
