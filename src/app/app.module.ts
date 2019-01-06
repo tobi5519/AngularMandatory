@@ -45,7 +45,7 @@ import { SitterHomeComponent } from './Components/Sitter/sitter-home/sitter-home
     MatGridListModule,
     MatCheckboxModule
   ],
-  providers: [AuthGuard],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

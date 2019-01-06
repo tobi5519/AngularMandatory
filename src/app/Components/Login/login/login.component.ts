@@ -3,6 +3,7 @@ import {FormBuilder, FormControl, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {AuthService} from '../../../auth/auth.service';
 import {ApiService} from '../../../Service/api/api.service';
+import {strictEqual} from 'assert';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,7 @@ import {ApiService} from '../../../Service/api/api.service';
 export class LoginComponent implements OnInit {
   loginForm: any;
   users = {};
-  selectControl: FormControl = new FormControl();
+  errorMessage = null;
 
   constructor(
     private fb: FormBuilder,
@@ -54,6 +55,7 @@ export class LoginComponent implements OnInit {
           });
         } else {
           console.log('Wrong username or password!');
+          this.errorMessage = 'Wrong username or password!';
         }
       }
     }

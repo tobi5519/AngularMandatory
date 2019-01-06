@@ -23,10 +23,10 @@ export class AuthGuard implements CanActivate {
   }
 
   checkLogin(url: string): boolean {
-    console.log('AuthGuard siger at isLoggedIn er: ' + localStorage.getItem('isLoggedIn'));
+    console.log('AuthGuard siger at isLoggedIn er: ' + this.authService.isLoggedIn);
     console.log('AuthGuard siger at currentUserToken er: ' + localStorage.getItem('currentUserToken'));
 
-    if (localStorage.getItem('isLoggedIn')) { return true; }
+    if (this.authService.isLoggedIn) { return true; }
 
     // Store the attempted URL for redirecting
     this.authService.redirectUrl = url;
