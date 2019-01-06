@@ -16,6 +16,7 @@ import { LoginComponent } from './Components/Login/login/login.component';
 import { RegisterComponent } from './Components/Register/register/register.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import { BabyHomeComponent } from './Components/Baby/baby-home/baby-home.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import { BabyHomeComponent } from './Components/Baby/baby-home/baby-home.compone
     AppRoutingModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,

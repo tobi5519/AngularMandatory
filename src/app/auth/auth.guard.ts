@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router} from '@angular/router';
-import { Observable } from 'rxjs';
 import {AuthService} from './auth.service';
 
 @Injectable({
@@ -17,6 +16,7 @@ export class AuthGuard implements CanActivate {
 
   checkLogin(url: string): boolean {
     console.log('AuthGuard siger at isLoggedIn er: ' + localStorage.getItem('isLoggedIn'));
+    console.log('AuthGuard siger at currentUserToken er: ' + localStorage.getItem('currentUserToken'));
 
     if (localStorage.getItem('isLoggedIn')) { return true; }
 
