@@ -11,6 +11,7 @@
       <div class="example-container">
         <mat-form-field>
           <input matInput type="password" formControlName="password" placeholder="password">
+          <mat-error *ngIf="errorMessage !== null">{{errorMessage}}</mat-error>
         </mat-form-field>
       </div>
 
@@ -18,7 +19,6 @@
       <div class="button-row">
         <button mat-flat-button>Login</button>
       </div>
-
 
       <!-- {{loginForm.status}} -->
     </div>

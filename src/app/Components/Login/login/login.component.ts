@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {AuthService} from '../../../auth/auth.service';
+import {ApiService} from '../../../Service/api/api.service';
+import {strictEqual} from 'assert';
 
 @Component({
   selector: 'app-login',
@@ -10,8 +12,14 @@ import {AuthService} from '../../../auth/auth.service';
 })
 export class LoginComponent implements OnInit {
   loginForm: any;
+  users = {};
+  errorMessage = null;
 
-  constructor(private fb: FormBuilder, private router: Router, private authService: AuthService) { } // dependency injections
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private authService: AuthService,
+    private apiService: ApiService) { } // dependency injections
 
   ngOnInit() {
     this.loginForm = this.fb.group(
@@ -20,18 +28,36 @@ export class LoginComponent implements OnInit {
         password: ['', Validators.required]
       }
     );
+    this.users = this.apiService.getAllUsers().subscribe(
+      (responseFromApi: any[]) => {this.users = responseFromApi.filter(x => x._APIId === 'SitMaBaby'); },
+      err => {console.log(err); },
+      () => {console.log('Done loading users!'); }
+    );
   }
+
+  // convenience getter for easy access to form fields
+  get f() { return this.loginForm.controls; }
+
 
   onSubmit(loginForm) {
     if (loginForm.valid) {
-      // Send request to back-end to validate login.
-      this.authService.login().subscribe(result => {
-        // Navigate based on a certain condition.
-        this.router.navigate(['/home']);
-      });
-      // this.router.navigate(['home']);
-    } else {
-      // promt user for not filling out fields.
+      for (let key in this.users) {
+        if (this.f.username.value === this.users[key]['userName'] && this.f.password.value === this.users[key]['password']) {
+          localStorage.setItem('currentUserType', this.users[key]['type']);
+          this.authService.login(this.users[key]['_id']).subscribe(result => {
+            if (localStorage.getItem('currentUserType') === 'Sitter') { // If currentUserType is Sitter then user is navigated to /sitter
+              this.router.navigate(['/sitter']);
+            } else if (localStorage.getItem('currentUserType') === 'Baby') { // If currentUserType is Sitter then user is navigated to /sitter
+              this.router.navigate(['/baby']);
+            } else {
+              this.router.navigate(['/login']);
+            }
+          });
+        } else {
+          console.log('Wrong username or password!');
+          this.errorMessage = 'Wrong username or password!';
+        }
+      }
     }
 
     console.log(loginForm);
